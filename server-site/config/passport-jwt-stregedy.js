@@ -12,7 +12,6 @@ let opts = {
 passport.use(
   new JwtStrategy(opts, function (jwtPayLoad, done) {
     User.findById(jwtPayLoad._id, function (err, user) {
-      console.log("jwt payload", jwtPayLoad);
       if (err) {
         console.log("Error in finding user from JWT");
         return done(err, false);

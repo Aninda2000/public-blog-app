@@ -14,5 +14,10 @@ router.delete(
   articleController.destroy
 );
 router.get("/all-articles", articleController.getAllArticles);
+router.post(
+  "/update/:id",
+  passport.authenticate("jwt", { session: false }),
+  articleController.update
+);
 
 module.exports = router;

@@ -1,6 +1,5 @@
 const Article = require("../../models/article");
 module.exports.create = function (req, res) {
-  console.log(req.user);
   if (req.user) {
     Article.create({
       articleName: req.body.articleName,
@@ -43,4 +42,36 @@ module.exports.getAllArticles = function (req, res) {
       .status(200)
       .json({ msg: "all Articles fetched successfully", data: articles });
   });
+};
+
+module.exports.update = function (req, res) {
+  // console.log(req.u);
+  if (req.user) {
+    Article.findById(req.params.id, function (err, article) {
+      console.log(article);
+      if (err) {
+        return res.status(500).json({ msg: "Internal server Error****" });
+      }
+      if (article) {
+        console.log("inside article", article);
+        if (req.user.id == article.user) {
+          Article.findByIdAndUpdate(req.params.id, {
+            articleName: req.body.articleName,
+            catagory: req.body.catagory,
+            tag: req.body.tag,
+            user: req.user.id,
+          });
+          return res
+            .status(200)
+            .json({ msg: "article successfully updated!!" });
+        } else {
+          return res.status(500).json({ msg: "unauthorized!! " });
+        }
+      } else {
+        return res.status(200).json({ msg: "article not found!!" });
+      }
+    });
+  } else {
+    return res.status(500).json({ msg: "unauthorized!! " });
+  }
 };
