@@ -48,7 +48,6 @@ module.exports.update = function (req, res) {
   // console.log(req.u);
   if (req.user) {
     Article.findById(req.params.id, function (err, article) {
-      console.log(article);
       if (err) {
         return res.status(500).json({ msg: "Internal server Error****" });
       }
