@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Box, TextField, Button, styled, Typography } from "@mui/material";
 
 const Component = styled(Box)`
@@ -47,20 +48,67 @@ const Text = styled(Typography)`
   color: grey;
   font-size: 15px;
 `;
+const signupInitialValues = {
+  name: "",
+  username: "",
+  password: "",
+};
 const Login = () => {
   const imageURL =
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpontSlvp3M590TtkTRDwJsrtZX9m0ADSqug&usqp=CAU";
+
+  const [account, toggleAccount] = useState("login");
+
+  const [signup, setSignupValue] = useState(signupInitialValues);
+  const toggleSignup = () => {
+    account === "signup" ? toggleAccount("login") : toggleAccount("signup");
+  };
+
+  const onInputChange = (e) => {
+    setSignupValue({ ...signup, [e.target.name]: e.target.value });
+  };
+
   return (
     <Component>
       <Box>
         <Image src={imageURL} alt="login" />
-        <Wrapper>
-          <TextField variant="standard" label="Enter Username" />
-          <TextField variant="standard" label="Enter Password" />
-          <LoginButton variant="contained">Login</LoginButton>
-          <Text style={{ textAlign: "center" }}> OR</Text>
-          <SignUpButton>Create an Account</SignUpButton>
-        </Wrapper>
+        {account === "login" ? (
+          <Wrapper>
+            <TextField variant="standard" label="Enter Username" />
+            <TextField variant="standard" label="Enter Password" />
+            <LoginButton variant="contained">Login</LoginButton>
+            <Text style={{ textAlign: "center" }}> OR</Text>
+            <SignUpButton onClick={() => toggleSignup()}>
+              Create an Account
+            </SignUpButton>
+          </Wrapper>
+        ) : (
+          <Wrapper>
+            <TextField
+              variant="standard"
+              onChange={(e) => onInputChange(e)}
+              name="name"
+              label="Enter Name"
+            />
+            <TextField
+              variant="standard"
+              onChange={(e) => onInputChange(e)}
+              name="username"
+              label="Enter Username"
+            />
+            <TextField
+              variant="standard"
+              onChange={(e) => onInputChange(e)}
+              name="password"
+              label="Enter Password"
+            />
+            <SignUpButton>Signup</SignUpButton>
+            <Text style={{ textAlign: "center" }}> OR</Text>
+            <LoginButton variant="contained" onClick={() => toggleSignup()}>
+              Already have an account
+            </LoginButton>
+          </Wrapper>
+        )}
       </Box>
     </Component>
   );
