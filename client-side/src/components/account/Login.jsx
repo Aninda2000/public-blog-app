@@ -68,6 +68,8 @@ const Login = () => {
     setSignupValue({ ...signup, [e.target.name]: e.target.value });
   };
 
+  const signupUser = () => {};
+
   return (
     <Component>
       <Box>
@@ -102,7 +104,7 @@ const Login = () => {
               name="password"
               label="Enter Password"
             />
-            <SignUpButton>Signup</SignUpButton>
+            <SignUpButton onClick={() => signupUser()}>Signup</SignUpButton>
             <Text style={{ textAlign: "center" }}> OR</Text>
             <LoginButton variant="contained" onClick={() => toggleSignup()}>
               Already have an account
