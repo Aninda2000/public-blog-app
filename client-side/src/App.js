@@ -1,10 +1,15 @@
 import "./App.css";
-import Login from "./components/account/Login";
+import Login from "./components/Login";
+import { Route, Routes } from "react-router-dom";
+import Home from "./components/Home";
 
 function App() {
   return (
     <div style={{ marginTop: 40 }}>
-      <Login />
+      <Routes>
+        <Route path="/" component={Home} />
+        <Route path="/login" component={Login} />
+      </Routes>
     </div>
   );
 }
