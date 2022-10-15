@@ -1,4 +1,4 @@
-const API_ROOT = "http://localhost:8000/api/";
+const API_ROOT = "http://localhost:8000/api";
 
 export const API_URLS = {
   login: () => `${API_ROOT}/users/login`,

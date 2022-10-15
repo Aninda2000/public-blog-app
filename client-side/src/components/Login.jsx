@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Box, TextField, Button, styled, Typography } from "@mui/material";
+import {signupuser} from '../service/customFetch';
 
 const Component = styled(Box)`
   width: 400px;
@@ -68,7 +69,10 @@ const Login = () => {
     setSignupValue({ ...signup, [e.target.name]: e.target.value });
   };
 
-  const signupUser = () => {};
+  const signupUser = () => {
+    //fetch the api
+    signupuser();
+  };
 
   return (
     <Component>
